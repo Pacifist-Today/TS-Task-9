@@ -1,31 +1,33 @@
 //1 Напишіть узагальнену функцію filterArray(array, condition), яка фільтрує масив елементів на основі наданої умови.
 
-const arrayFilter = <TArr, TCondition> (arr: any[], condition: TCondition): TArr[] => {
-    return arr.filter(el => condition(el))
+const arrayFilter = <T>(arr: T[], condition: (el: T) => boolean): T[] => {
+    return arr.filter(condition);
 }
 
-const filteredArray = arrayFilter<number, Function>([1, '2', 5, true, 10, {}, 25, [], 42], Number.isInteger)
+const filteredArray = arrayFilter<any>(
+    [1, 2, '5', 10, '25', 42, {}, [], true],
+    Number.isInteger
+)
+
 console.log(filteredArray)
 
 //2 Створіть узагальнений клас Stack, який являє собою стек елементів з методами push, pop і peek.
 
-type TAnithyng = any
+type TAnything = any
+class Stack<TAny extends TAnything> {
+    storage: TAny[] = [] as TAny[]
 
-class Stack<TAny extends TAnithyng> {
-    storage: any[] = []
-
-    push(value: TAny): number {
+    push(value: any): number {
         this.storage.push(value)
         return this.storage.length
     }
 
-    pop(): TAny {
+    pop(): any {
         return this.storage.length >= 1 ? this.storage.pop() : 'empty stack'
     }
 
-    peek(): TAny {
+    peek(): any {
         return this.storage.length >= 1 ? this.storage[this.storage.length - 1] : 'empty stack'
-        // return this.storage[this.storage.length - 1]
     }
 }
 
@@ -47,9 +49,7 @@ interface IVocabulary {
 }
 
 class Dictionary <Tglossary extends IVocabulary, TProp extends TProperty> {
-    // vocabulary: {[key: string | number]: any} = {}
-    // vocabulary: IVocabulary = {}
-    vocabulary: Tglossary = {}
+    vocabulary: Tglossary = {} as Tglossary
 
     getValue(prop: TProp): any {
         return this.vocabulary[prop]
@@ -61,7 +61,7 @@ class Dictionary <Tglossary extends IVocabulary, TProp extends TProperty> {
     }
 
     hasValue(prop: TProp): boolean {
-        return typeof this.vocabulary[prop] === "undefined" ? false : true
+        return typeof this.vocabulary[prop] !== "undefined"
     }
 }
 
