@@ -13,30 +13,31 @@ console.log(filteredArray)
 
 //2 Створіть узагальнений клас Stack, який являє собою стек елементів з методами push, pop і peek.
 
-type TAnything = any
-class Stack<TAny extends TAnything> {
-    storage: TAny[] = [] as TAny[]
+type TSomeStrings = string
 
-    push(value: any): number {
+class Stack<TStrings extends TSomeStrings> {
+    storage: TStrings[] = [] as TStrings[]
+
+    push(value: TStrings): number {
         this.storage.push(value)
         return this.storage.length
     }
 
-    pop(): any {
-        return this.storage.length >= 1 ? this.storage.pop() : 'empty stack'
+    pop(): string {
+        return this.storage.length >= 1 ? this.storage.splice(-1).join('') : 'empty stack'
     }
 
-    peek(): any {
+    peek(): string {
         return this.storage.length >= 1 ? this.storage[this.storage.length - 1] : 'empty stack'
     }
 }
 
 const store = new Stack()
 
-store.push(5)
 store.push('lol')
-store.pop()
-store.peek()
+store.push('42')
+console.log(store.pop())
+console.log(store.peek())
 
 console.log(store.storage)
 
