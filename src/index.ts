@@ -23,12 +23,12 @@ class Stack<TStrings extends TSomeStrings> {
         return this.storage.length
     }
 
-    pop(): string {
-        return this.storage.length >= 1 ? this.storage.splice(-1).join('') : 'empty stack'
+    pop(): string | undefined {
+        return this.storage.length >= 1 ? this.storage.splice(-1).join('') : undefined
     }
 
-    peek(): string {
-        return this.storage.length >= 1 ? this.storage[this.storage.length - 1] : 'empty stack'
+    peek(): string | undefined {
+        return this.storage.length >= 1 ? this.storage[0] : undefined
     }
 }
 
