@@ -23,11 +23,11 @@ class Stack<TStrings extends TSomeStrings> {
         return this.storage.length
     }
 
-    pop(): string | undefined {
-        return this.storage.length >= 1 ? this.storage.splice(-1).join('') : undefined
+    pop(): TStrings | undefined {
+        return this.storage.length >= 1 ? this.storage.splice(-1)[0] : undefined
     }
 
-    peek(): string | undefined {
+    peek(): TStrings | undefined {
         return this.storage.length >= 1 ? this.storage[0] : undefined
     }
 }
